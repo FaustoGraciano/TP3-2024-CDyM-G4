@@ -3,7 +3,10 @@
 #include <util/twi.h>
 #include <stdio.h>
 
-#define DS3231_ADDRESS 0x68 // Dirección I2C del DS3231
+#define DS3232_ADDRESS 0x68 // Dirección I2C del DS3232
+#define I2C_WRITE 0
+#define I2C_READ 1
+
 
 // Prototipos de funciones internas
 static uint8_t bcdToDec(uint8_t bcd);
@@ -20,24 +23,76 @@ void RTC_Init(void) {
 }
 
 void RTC_GetDateTime(char* dateStr, char* timeStr) {
+	// Iniciar lectura desde la dirección 0x00 (segundos)
 	I2C_Start();
-	I2C_Write((DS3231_ADDRESS << 1) | TW_WRITE);
-	I2C_Write(0x00); // Dirección de registro de segundos
+	I2C_Write((DS3232_ADDRESS << 1) | I2C_WRITE);
+	I2C_Write(0x00);
 	I2C_Stop();
 
+	// Leer tiempo (segundos, minutos, horas)
 	I2C_Start();
-	I2C_Write((DS3231_ADDRESS << 1) | TW_READ);
+	I2C_Write((DS3232_ADDRESS << 1) | I2C_READ);
 	uint8_t seconds = bcdToDec(I2C_ReadAck());
 	uint8_t minutes = bcdToDec(I2C_ReadAck());
 	uint8_t hours = bcdToDec(I2C_ReadAck());
-	I2C_ReadAck(); // Día de la semana (ignorado)
+	I2C_Stop();
+
+	// Iniciar lectura desde la dirección 0x04 (día)
+	I2C_Start();
+	I2C_Write((DS3232_ADDRESS << 1) | I2C_WRITE);
+	I2C_Write(0x04);
+	I2C_Stop();
+
+	// Leer fecha (día, mes, año)
+	I2C_Start();
+	I2C_Write((DS3232_ADDRESS << 1) | I2C_READ);
 	uint8_t day = bcdToDec(I2C_ReadAck());
 	uint8_t month = bcdToDec(I2C_ReadAck());
 	uint8_t year = bcdToDec(I2C_ReadNack());
 	I2C_Stop();
 
-	sprintf(dateStr, "%02d/%02d/%02d", day, month, year);
+	// Formatear fecha y hora
 	sprintf(timeStr, "%02d:%02d:%02d", hours, minutes, seconds);
+	sprintf(dateStr, "%02d/%02d/%02d", day, month, year);
+	
+}
+
+void RTC_GetTime(char* timeStr) {
+	// Iniciar lectura desde la dirección 0x00 (segundos)
+	I2C_Start();
+	I2C_Write((DS3232_ADDRESS << 1) | I2C_WRITE);
+	I2C_Write(0x00); // Dirección de registro de segundos
+	I2C_Stop();
+
+	// Leer tiempo (segundos, minutos, horas)
+	I2C_Start();
+	I2C_Write((DS3232_ADDRESS << 1) | I2C_READ);
+	uint8_t seconds = bcdToDec(I2C_ReadAck());
+	uint8_t minutes = bcdToDec(I2C_ReadAck());
+	uint8_t hours = bcdToDec(I2C_ReadNack());
+	I2C_Stop();
+
+	// Formatear hora
+	sprintf(timeStr, "%02d:%02d:%02d", hours, minutes, seconds);
+}
+
+void RTC_GetDate(char* dateStr) {
+	// Iniciar lectura desde la dirección 0x04 (día del mes)
+	I2C_Start();
+	I2C_Write((DS3232_ADDRESS << 1) | I2C_WRITE);
+	I2C_Write(0x04); // Dirección de registro de día del mes
+	I2C_Stop();
+
+	// Leer fecha (día, mes, año)
+	I2C_Start();
+	I2C_Write((DS3232_ADDRESS << 1) | I2C_READ);
+	uint8_t day = bcdToDec(I2C_ReadAck());
+	uint8_t month = bcdToDec(I2C_ReadAck());
+	uint8_t year = bcdToDec(I2C_ReadNack());
+	I2C_Stop();
+
+	// Formatear fecha
+	sprintf(dateStr, "%02d/%02d/%02d", day, month, year);
 }
 
 static uint8_t bcdToDec(uint8_t bcd) {
@@ -50,7 +105,7 @@ static uint8_t decToBcd(uint8_t dec) {
 
 static void I2C_Init(void) {
 	TWSR = 0x00; // Configurar prescaler a 1
-	TWBR = 0x48; // Configurar SCL a 100kHz para F_CPU = 16MHz
+	TWBR = 152; // Configurar SCL a 100kHz para F_CPU = 16MHz
 	TWCR = 0x04; // Habilitar TWI
 }
 
