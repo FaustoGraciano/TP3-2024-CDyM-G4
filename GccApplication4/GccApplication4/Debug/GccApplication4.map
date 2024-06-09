@@ -47,10 +47,8 @@ Discarded input sections
  .text          0x00000000        0x0 RTC.o
  .data          0x00000000        0x0 RTC.o
  .bss           0x00000000        0x0 RTC.o
- .text.I2C_Init
-                0x00000000       0x12 RTC.o
- .text.RTC_Init
-                0x00000000        0x6 RTC.o
+ .text.RTC_GetDateTime
+                0x00000000       0xfa RTC.o
  .text          0x00000000        0x0 serialPort.o
  .data          0x00000000        0x0 serialPort.o
  .bss           0x00000000        0x0 serialPort.o
@@ -330,7 +328,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x9f4
+.text           0x00000000      0xa44
  *(.vectors)
  .vectors       0x00000000       0x68 F:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
                 0x00000000                __vector_default
@@ -421,85 +419,93 @@ END GROUP
  .text.getTemperatura
                 0x000000ac        0x6 DHT11.o
                 0x000000ac                getTemperatura
- .text.main     0x000000b2       0x9c main.o
+ .text.main     0x000000b2       0xa4 main.o
                 0x000000b2                main
  .text.bcdToDec
-                0x0000014e       0x16 RTC.o
+                0x00000156       0x16 RTC.o
+ .text.I2C_Init
+                0x0000016c       0x12 RTC.o
  .text.I2C_Start
-                0x00000164       0x10 RTC.o
+                0x0000017e       0x10 RTC.o
  .text.I2C_Stop
-                0x00000174       0x10 RTC.o
+                0x0000018e       0x10 RTC.o
  .text.I2C_Write
-                0x00000184       0x14 RTC.o
+                0x0000019e       0x14 RTC.o
  .text.I2C_ReadAck
-                0x00000198       0x14 RTC.o
+                0x000001b2       0x14 RTC.o
  .text.I2C_ReadNack
-                0x000001ac       0x14 RTC.o
- .text.RTC_GetDateTime
-                0x000001c0       0xdc RTC.o
-                0x000001c0                RTC_GetDateTime
+                0x000001c6       0x14 RTC.o
+ .text.RTC_Init
+                0x000001da        0x6 RTC.o
+                0x000001da                RTC_Init
+ .text.RTC_GetTime
+                0x000001e0       0x86 RTC.o
+                0x000001e0                RTC_GetTime
+ .text.RTC_GetDate
+                0x00000266       0x86 RTC.o
+                0x00000266                RTC_GetDate
  .text.__vector_18
-                0x0000029c       0x36 serialPort.o
-                0x0000029c                __vector_18
+                0x000002ec       0x36 serialPort.o
+                0x000002ec                __vector_18
  .text.SerialPort_Init
-                0x000002d2       0x14 serialPort.o
-                0x000002d2                SerialPort_Init
+                0x00000322       0x14 serialPort.o
+                0x00000322                SerialPort_Init
  .text.SerialPort_TX_Enable
-                0x000002e6        0xc serialPort.o
-                0x000002e6                SerialPort_TX_Enable
+                0x00000336        0xc serialPort.o
+                0x00000336                SerialPort_TX_Enable
  .text.SerialPort_RX_Enable
-                0x000002f2        0xc serialPort.o
-                0x000002f2                SerialPort_RX_Enable
+                0x00000342        0xc serialPort.o
+                0x00000342                SerialPort_RX_Enable
  .text.SerialPort_RX_Interrupt_Enable
-                0x000002fe        0xc serialPort.o
-                0x000002fe                SerialPort_RX_Interrupt_Enable
+                0x0000034e        0xc serialPort.o
+                0x0000034e                SerialPort_RX_Interrupt_Enable
  .text.SerialPort_Wait_For_TX_Buffer_Free
-                0x0000030a        0xa serialPort.o
-                0x0000030a                SerialPort_Wait_For_TX_Buffer_Free
+                0x0000035a        0xa serialPort.o
+                0x0000035a                SerialPort_Wait_For_TX_Buffer_Free
  .text.SerialPort_Send_Data
-                0x00000314        0x6 serialPort.o
-                0x00000314                SerialPort_Send_Data
+                0x00000364        0x6 serialPort.o
+                0x00000364                SerialPort_Send_Data
  .text.SerialPort_Send_String
-                0x0000031a       0x38 serialPort.o
-                0x0000031a                SerialPort_Send_String
+                0x0000036a       0x38 serialPort.o
+                0x0000036a                SerialPort_Send_String
  .text.SerialPort_Send_uint8_t
-                0x00000352       0x56 serialPort.o
-                0x00000352                SerialPort_Send_uint8_t
+                0x000003a2       0x56 serialPort.o
+                0x000003a2                SerialPort_Send_uint8_t
  .text.configurarTimer1
-                0x000003a8       0x28 Timer.o
-                0x000003a8                configurarTimer1
+                0x000003f8       0x28 Timer.o
+                0x000003f8                configurarTimer1
  .text.__vector_11
-                0x000003d0       0x4c Timer.o
-                0x000003d0                __vector_11
+                0x00000420       0x4c Timer.o
+                0x00000420                __vector_11
  .text.avr-libc
-                0x0000041c       0x44 f:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(sprintf.o)
-                0x0000041c                sprintf
+                0x0000046c       0x44 f:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(sprintf.o)
+                0x0000046c                sprintf
  .text.avr-libc
-                0x00000460      0x3c2 f:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
-                0x00000460                vfprintf
+                0x000004b0      0x3c2 f:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
+                0x000004b0                vfprintf
  .text.avr-libc
-                0x00000822       0x16 f:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
-                0x00000822                strnlen_P
+                0x00000872       0x16 f:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
+                0x00000872                strnlen_P
  .text.avr-libc
-                0x00000838       0x16 f:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen.o)
-                0x00000838                strnlen
+                0x00000888       0x16 f:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen.o)
+                0x00000888                strnlen
  .text.avr-libc
-                0x0000084e       0x78 f:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(fputc.o)
-                0x0000084e                fputc
+                0x0000089e       0x78 f:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(fputc.o)
+                0x0000089e                fputc
  .text.avr-libc
-                0x000008c6       0xbc f:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
-                0x000008c6                __ultoa_invert
+                0x00000916       0xbc f:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
+                0x00000916                __ultoa_invert
  .text.libgcc.prologue
-                0x00000982       0x38 f:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_prologue.o)
-                0x00000982                __prologue_saves__
+                0x000009d2       0x38 f:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_prologue.o)
+                0x000009d2                __prologue_saves__
  .text.libgcc.prologue
-                0x000009ba       0x36 f:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_epilogue.o)
-                0x000009ba                __epilogue_restores__
-                0x000009f0                . = ALIGN (0x2)
+                0x00000a0a       0x36 f:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_epilogue.o)
+                0x00000a0a                __epilogue_restores__
+                0x00000a40                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x000009f0        0x0 f:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x000009f0                _exit
-                0x000009f0                exit
+ .fini9         0x00000a40        0x0 f:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x00000a40                _exit
+                0x00000a40                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -518,11 +524,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x000009f0        0x4 f:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x00000a40        0x4 f:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x000009f4                _etext = .
+                0x00000a44                _etext = .
 
-.data           0x00800100       0x52 load address 0x000009f4
+.data           0x00800100       0x52 load address 0x00000a44
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -566,8 +572,8 @@ END GROUP
                 0x00800159                hora
                 0x0080015a                fecha
                 0x0080015b                PROVIDE (__bss_end, .)
-                0x000009f4                __data_load_start = LOADADDR (.data)
-                0x00000a46                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00000a44                __data_load_start = LOADADDR (.data)
+                0x00000a96                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x0080015b        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
@@ -646,30 +652,30 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000      0x178
+.debug_aranges  0x00000000      0x188
  *(.debug_aranges)
  .debug_aranges
                 0x00000000       0x30 DHT11.o
  .debug_aranges
                 0x00000030       0x20 main.o
  .debug_aranges
-                0x00000050       0x60 RTC.o
+                0x00000050       0x70 RTC.o
  .debug_aranges
-                0x000000b0       0x88 serialPort.o
+                0x000000c0       0x88 serialPort.o
  .debug_aranges
-                0x00000138       0x40 Timer.o
+                0x00000148       0x40 Timer.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x1319
+.debug_info     0x00000000     0x158a
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x5f4 F:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_info    0x000005f4      0x1cc DHT11.o
- .debug_info    0x000007c0      0x3e5 main.o
- .debug_info    0x00000ba5      0x2ec RTC.o
- .debug_info    0x00000e91      0x35a serialPort.o
- .debug_info    0x000011eb      0x12e Timer.o
+ .debug_info    0x000007c0      0x416 main.o
+ .debug_info    0x00000bd6      0x52c RTC.o
+ .debug_info    0x00001102      0x35a serialPort.o
+ .debug_info    0x0000145c      0x12e Timer.o
 
 .debug_abbrev   0x00000000      0xb35
  *(.debug_abbrev)
@@ -680,44 +686,44 @@ END GROUP
  .debug_abbrev  0x0000094c      0x15b serialPort.o
  .debug_abbrev  0x00000aa7       0x8e Timer.o
 
-.debug_line     0x00000000      0xb60
+.debug_line     0x00000000      0xc45
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x134 F:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_line    0x00000134      0x1c0 DHT11.o
- .debug_line    0x000002f4      0x1c6 main.o
- .debug_line    0x000004ba      0x232 RTC.o
- .debug_line    0x000006ec      0x2fc serialPort.o
- .debug_line    0x000009e8      0x178 Timer.o
+ .debug_line    0x000002f4      0x1d2 main.o
+ .debug_line    0x000004c6      0x30b RTC.o
+ .debug_line    0x000007d1      0x2fc serialPort.o
+ .debug_line    0x00000acd      0x178 Timer.o
 
-.debug_frame    0x00000000      0x35c
+.debug_frame    0x00000000      0x3f4
  *(.debug_frame)
  .debug_frame   0x00000000       0x54 DHT11.o
  .debug_frame   0x00000054       0x24 main.o
- .debug_frame   0x00000078      0x118 RTC.o
- .debug_frame   0x00000190      0x154 serialPort.o
- .debug_frame   0x000002e4       0x78 Timer.o
+ .debug_frame   0x00000078      0x1b0 RTC.o
+ .debug_frame   0x00000228      0x154 serialPort.o
+ .debug_frame   0x0000037c       0x78 Timer.o
 
-.debug_str      0x00000000      0x6c3
+.debug_str      0x00000000      0x6db
  *(.debug_str)
  .debug_str     0x00000000      0x208 F:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_str     0x00000208      0x1bf DHT11.o
                                 0x1fb (size before relaxing)
- .debug_str     0x000003c7       0xec main.o
-                                0x2b6 (size before relaxing)
- .debug_str     0x000004b3       0x95 RTC.o
-                                0x206 (size before relaxing)
- .debug_str     0x00000548      0x104 serialPort.o
+ .debug_str     0x000003c7       0xfd main.o
+                                0x2c7 (size before relaxing)
+ .debug_str     0x000004c4       0x9c RTC.o
+                                0x21e (size before relaxing)
+ .debug_str     0x00000560      0x104 serialPort.o
                                 0x302 (size before relaxing)
- .debug_str     0x0000064c       0x77 Timer.o
+ .debug_str     0x00000664       0x77 Timer.o
                                 0x1df (size before relaxing)
 
-.debug_loc      0x00000000      0x7a0
+.debug_loc      0x00000000      0xa28
  *(.debug_loc)
  .debug_loc     0x00000000      0x15e DHT11.o
  .debug_loc     0x0000015e       0x46 main.o
- .debug_loc     0x000001a4      0x2b4 RTC.o
- .debug_loc     0x00000458      0x2ff serialPort.o
- .debug_loc     0x00000757       0x49 Timer.o
+ .debug_loc     0x000001a4      0x53c RTC.o
+ .debug_loc     0x000006e0      0x2ff serialPort.o
+ .debug_loc     0x000009df       0x49 Timer.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -737,13 +743,13 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000      0x168
+.debug_ranges   0x00000000      0x178
  *(.debug_ranges)
  .debug_ranges  0x00000000       0x60 DHT11.o
  .debug_ranges  0x00000060       0x10 main.o
- .debug_ranges  0x00000070       0x50 RTC.o
- .debug_ranges  0x000000c0       0x78 serialPort.o
- .debug_ranges  0x00000138       0x30 Timer.o
+ .debug_ranges  0x00000070       0x60 RTC.o
+ .debug_ranges  0x000000d0       0x78 serialPort.o
+ .debug_ranges  0x00000148       0x30 Timer.o
 
 .debug_macro
  *(.debug_macro)

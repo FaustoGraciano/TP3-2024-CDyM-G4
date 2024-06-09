@@ -21,6 +21,8 @@ char hora[];
 volatile uint8_t suspendFlag = 0; // Bandera de suspensión
 int main(void)
 { 
+	
+	RTC_Init();
 	int result=0;
     configurarTimer1();
 	SerialPort_Init(BR9600); 
@@ -42,15 +44,16 @@ int main(void)
 		_delay_us(40);
 		//result = LeerDHT(PINC0);
 		//  if (result == DHTLIB_OK) {
-			RTC_GetDateTime(fecha, hora);
 			  SerialPort_Send_String(msg1);
 			  SerialPort_Send_uint8_t(getHumedad());
 			  SerialPort_Send_String(msg2);
 			  SerialPort_Send_String(msg3);	
 			  SerialPort_Send_uint8_t(getTemperatura());
 			  SerialPort_Send_String(msg4);
+			   RTC_GetDate(fecha);
 			   SerialPort_Send_String(" FECHA: ");
 			   SerialPort_Send_String(fecha);
+			   RTC_GetTime(hora);
 			   SerialPort_Send_String(" HORA: ");
 			   SerialPort_Send_String(hora);
 		//	  } else {
