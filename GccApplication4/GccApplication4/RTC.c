@@ -21,6 +21,27 @@ static uint8_t I2C_ReadNack(void);
 void RTC_Init(void) {
 	I2C_Init();
 }
+void RTC_SetTime(){
+	I2C_Start();
+	I2C_Write((DS3232_ADDRESS << 1) | I2C_WRITE);
+	I2C_Write(0x00); // Dirección de registro de segundos
+	I2C_Write(0x14);
+	I2C_Write(0x30);
+	I2C_Write(0x15);   
+	I2C_Stop();
+	
+}
+
+void RTC_SetDate(){
+	I2C_Start();
+	I2C_Write((DS3232_ADDRESS << 1) | I2C_WRITE);
+	I2C_Write(0x04); // Dirección de registro de fecha
+	I2C_Write(0x10);
+	I2C_Write(0x06);
+	I2C_Write(0x24);
+	I2C_Stop();
+	
+}
 
 void RTC_GetTime(char* timeStr) {
 	// Iniciar lectura desde la dirección 0x00 (segundos)
@@ -70,7 +91,7 @@ static uint8_t decToBcd(uint8_t dec) {
 
 static void I2C_Init(void) {
 	TWSR = 0x00; // Configurar prescaler a 1
-	TWBR = 152; // Configurar SCL a 100kHz para F_CPU = 16MHz
+	TWBR = 255; //152 Configurar SCL a kHz para F_CPU = 16MHz
 	TWCR = 0x04; // Habilitar TWI
 }
 
