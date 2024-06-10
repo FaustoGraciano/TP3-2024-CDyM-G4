@@ -25,23 +25,27 @@ uint8_t Flag_tiempo;
 char msg1[]=" Humedad: ";
 char msg2[]="%  ";
 char msg3[]=" Temperatura: ";
-char msg4[]="ÕC  ";
+char msg4[]="C  ";
 char fecha[];
 char hora[];
+char salto[]="\r\n";
+
 volatile uint8_t suspendFlag = 0; // Bandera de suspensión
 int main(void)
 { 
 	
 	RTC_Init();
+	//RTC_SetDate();
+	//RTC_SetTime();
 	int result=0;
-    configurarTimer1();
+   // configurarTimer1();
 	SerialPort_Init(BR9600); 
 	SerialPort_TX_Enable();		// Inicializo formato 8N1 y BAUDRATE = 9600bps
 	SerialPort_RX_Enable();			// Activo el Receptor del Puerto Serie
 	SerialPort_RX_Interrupt_Enable();
 	sei();								// Activo la mascara global de interrupciones (Bit I del SREG en 1)
     while(1){ 
-	if(!suspendFlag) {		
+	if(!suspendFlag) {				
 		result = LeerDHT(PINC0);
 		  if (result == DHTLIB_OK) {
 			  SerialPort_Send_String(msg1);
@@ -50,19 +54,20 @@ int main(void)
 			  SerialPort_Send_String(msg3);	
 			  SerialPort_Send_uint8_t(getTemperatura());
 			  SerialPort_Send_String(msg4);
-			  cli();
+			  //cli();
 			   RTC_GetDate(fecha);
 			   SerialPort_Send_String(" FECHA: ");
 			   SerialPort_Send_String(fecha);
 			   RTC_GetTime(hora);
 			   SerialPort_Send_String(" HORA: ");
 			   SerialPort_Send_String(hora);
+			  // SerialPort_Send_String(salto);
 			  }
-		sei();
-		//  inicializarContadores();
-		  //while(chequeoFlag2()) {
+		//sei();
+			//inicializarContadores();
+		 // while(chequeoFlag2()) {
 			  _delay_ms(2000);
-		    //}
+		  //  }
 		  // Esperar 2 segundos antes de la siguiente lectura
 	  }
 	}
@@ -76,7 +81,6 @@ void configurarTimer1() {
 	TCCR1B |= (1 << WGM12) | (1 << CS11) | (1 << CS10); // Modo CTC, prescaler de 64
 	OCR1A = 249; // Configurar OCR1A para que el comparador coincida cada 1 milisegundo
 	TIMSK1 |= (1 << OCIE1A); // Habilitar interrupción de comparador A
-	sei(); // Habilitar interrupciones globales
 }
 
 // Función para inicializar los contadores
@@ -113,7 +117,7 @@ ISR(TIMER1_COMPA_vect) {
 		Flag_MEF = 1;
 		countMEF = 0;
 	}
-	if (count2 == 200) {
+	if (count2 == 2000) {
 		Flag_tiempo = 1;
 		count2 = 0;
 	}

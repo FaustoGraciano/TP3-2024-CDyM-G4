@@ -24,7 +24,7 @@ int LeerDHT(uint8_t pin) {
    	}
    	
    	while(!(PINC & (1<<PINC0))){
-	   	// Esperar hasta que el pin se vuelva
+	   	// Esperar hasta que el pin se vuelva alto
    	}
    	
    	while((PINC & (1<<PINC0))){
