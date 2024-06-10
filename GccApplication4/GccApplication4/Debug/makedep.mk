@@ -10,5 +10,3 @@ RTC.c
 
 serialPort.c
 
-Timer.c
-

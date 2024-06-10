@@ -100,11 +100,6 @@ char SerialPort_Recive_Data(void){
 void SerialPort_Send_uint8_t(uint8_t num){
 	
 	SerialPort_Wait_For_TX_Buffer_Free();
-	SerialPort_Send_Data('0'+num/100);
-	
-	num-=100;
-	
-	SerialPort_Wait_For_TX_Buffer_Free();
 	SerialPort_Send_Data('0'+num/10);
 	
 	SerialPort_Wait_For_TX_Buffer_Free();

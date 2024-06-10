@@ -22,41 +22,6 @@ void RTC_Init(void) {
 	I2C_Init();
 }
 
-void RTC_GetDateTime(char* dateStr, char* timeStr) {
-	// Iniciar lectura desde la dirección 0x00 (segundos)
-	I2C_Start();
-	I2C_Write((DS3232_ADDRESS << 1) | I2C_WRITE);
-	I2C_Write(0x00);
-	I2C_Stop();
-
-	// Leer tiempo (segundos, minutos, horas)
-	I2C_Start();
-	I2C_Write((DS3232_ADDRESS << 1) | I2C_READ);
-	uint8_t seconds = bcdToDec(I2C_ReadAck());
-	uint8_t minutes = bcdToDec(I2C_ReadAck());
-	uint8_t hours = bcdToDec(I2C_ReadAck());
-	I2C_Stop();
-
-	// Iniciar lectura desde la dirección 0x04 (día)
-	I2C_Start();
-	I2C_Write((DS3232_ADDRESS << 1) | I2C_WRITE);
-	I2C_Write(0x04);
-	I2C_Stop();
-
-	// Leer fecha (día, mes, año)
-	I2C_Start();
-	I2C_Write((DS3232_ADDRESS << 1) | I2C_READ);
-	uint8_t day = bcdToDec(I2C_ReadAck());
-	uint8_t month = bcdToDec(I2C_ReadAck());
-	uint8_t year = bcdToDec(I2C_ReadNack());
-	I2C_Stop();
-
-	// Formatear fecha y hora
-	sprintf(timeStr, "%02d:%02d:%02d", hours, minutes, seconds);
-	sprintf(dateStr, "%02d/%02d/%02d", day, month, year);
-	
-}
-
 void RTC_GetTime(char* timeStr) {
 	// Iniciar lectura desde la dirección 0x00 (segundos)
 	I2C_Start();
