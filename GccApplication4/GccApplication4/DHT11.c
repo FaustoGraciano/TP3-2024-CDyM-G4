@@ -11,25 +11,47 @@ static uint8_t temperatura;
 int LeerDHT(uint8_t pin) {
  // Recepción de datos
 	uint8_t data[5] = {0};
-	uint8_t timeout = 0;
+	DDRC|=(1<<PINC0);
+	PORTC|= (1<<PINC0);
+	_delay_ms(1);
+	PORTC&= ~(1<<PINC0);
+	_delay_ms(20);
+	PORTC|=(1<<PINC0);
+	DDRC&=~(1<<PINC0);
+
+   	while((PINC & (1<<PINC0))){
+	   	// Esperar hasta que el pin se vuelva bajo
+   	}
+   	
+   	while(!(PINC & (1<<PINC0))){
+	   	// Esperar hasta que el pin se vuelva
+   	}
+   	
+   	while((PINC & (1<<PINC0))){
+	   	// Esperar hasta que el pin se vuelva bajo
+   	}
+
 	for (int i = 0; i < 5; i++) {
 		for (int j = 7; j >= 0; j--) {
-			while (pin == 0) {
+			
+			while(!(PINC & (1<<PINC0))){
 				// Esperar hasta que el pin se vuelva alto
-				if (++timeout > 60) {
-					return DHTLIB_ERROR_TIMEOUT; // Error de timeout
-				}
-
 			}
+			
 			_delay_us(30);
-			if (pin==1){
+			if((PINC & (1<<PINC0))){
 				data[i] |= (1 << j); // Si la duración es mayor a 40us, el bit es un 1
 			}
+			
+			while((PINC & (1<<PINC0))){
+				// Esperar hasta que el pin se vuelva bajo
+			}
+			
 		}
 	}
 
 	// Verificar checksum
-	if (data[4] == ((data[0] + data[1] + data[2] + data[3]) & 0xFF)) {
+	if (data[4] == ((data[0] + data[1] + data[2] + data[3]))) {
 		// Decodificar datos
 		humedad = data[0];
 		temperatura = data[2];

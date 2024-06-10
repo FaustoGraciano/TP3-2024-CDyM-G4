@@ -40,8 +40,7 @@ C_SRCS +=  \
 ../DHT11.c \
 ../main.c \
 ../RTC.c \
-../serialPort.c \
-../Timer.c
+../serialPort.c
 
 
 PREPROCESSING_SRCS += 
@@ -54,29 +53,25 @@ OBJS +=  \
 DHT11.o \
 main.o \
 RTC.o \
-serialPort.o \
-Timer.o
+serialPort.o
 
 OBJS_AS_ARGS +=  \
 DHT11.o \
 main.o \
 RTC.o \
-serialPort.o \
-Timer.o
+serialPort.o
 
 C_DEPS +=  \
 DHT11.d \
 main.d \
 RTC.d \
-serialPort.d \
-Timer.d
+serialPort.d
 
 C_DEPS_AS_ARGS +=  \
 DHT11.d \
 main.d \
 RTC.d \
-serialPort.d \
-Timer.d
+serialPort.d
 
 OUTPUT_FILE_PATH +=GccApplication4.elf
 
@@ -114,13 +109,6 @@ LINKER_SCRIPT_DEP+=
 	
 
 ./serialPort.o: .././serialPort.c
-	@echo Building file: $<
-	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)F:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"F:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega328p -B "F:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega328p" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
-./Timer.o: .././Timer.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)F:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"F:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega328p -B "F:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega328p" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
