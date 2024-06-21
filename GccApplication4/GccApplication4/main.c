@@ -4,8 +4,7 @@
 #include <stdio.h>
 #include <avr/interrupt.h>
 #include "DHT11.h"
-#include "Timer.h"
-#define F_CPU 16000000UL
+#define F_CPU 16000000UL  
 #include <util/delay.h>
 #include "serialPort.h"
 #include "RTC.h"
@@ -13,7 +12,7 @@
 
 // Declarar las funciones
 void configurarTimer1();
-void inicializarContadores();
+void inicializarContador();
 uint8_t chequeoFlag();
 
 //variables
@@ -26,47 +25,44 @@ char msg4[]="C  ";
 char fecha[];
 char hora[];
 char salto[]="\r\n";
-
 volatile uint8_t suspendFlag = 0; // Bandera de suspensión
 int main(void)
 { 
-	
-	RTC_Init();
-	//RTC_SetDate();
-	//RTC_SetTime();
+	RTC_Init();  //inicializamos el RTC
+	//RTC_SetDate(); sirve por si se requiere setear una fecha (no pedido en el trabajo)
+	//RTC_SetTime(); sirve por si se requiere setear una tiempo (no pedido en el trabajo)
 	int result=0;
    configurarTimer1();
-	SerialPort_Init(BR9600); 
-	SerialPort_TX_Enable();		// Inicializo formato 8N1 y BAUDRATE = 9600bps
+	SerialPort_Init(BR9600);   // Inicializo formato 8N1 y BAUDRATE = 9600bps
+	SerialPort_TX_Enable();		// Activo el transmisor del Puerto Serie
 	SerialPort_RX_Enable();			// Activo el Receptor del Puerto Serie
-	SerialPort_RX_Interrupt_Enable();
-	sei();								// Activo la mascara global de interrupciones (Bit I del SREG en 1)
+	SerialPort_RX_Interrupt_Enable(); // habilitacion de las interrupciones del receptor
+	sei();								// habilitacion de interrupciones globales
     while(1){ 
-	if(!suspendFlag) {				
+	if(!suspendFlag) {	// si suspendFlag esta en 1, significa que el programa esta frenado.			
 		result = LeerDHT();
-		  if (result == DHTLIB_OK) {
-			  SerialPort_Send_String(msg1);
-			  SerialPort_Send_uint8_t(getHumedad());
-			  SerialPort_Send_String(msg2);
-			  SerialPort_Send_String(msg3);	
-			  SerialPort_Send_uint8_t(getTemperatura());
-			  SerialPort_Send_String(msg4);
-			   cli();
-			   RTC_GetDate(fecha);
+		  if (result == DHTLIB_OK) {  //si no hubo errores en recibir los datos del DHT11
+			  SerialPort_Send_String(msg1);          //"Humedad: "
+			  SerialPort_Send_uint8_t(getHumedad()); //se envia el valor obtenido de la humedad del DHT11
+			  SerialPort_Send_String(msg2); //"%  "
+			  SerialPort_Send_String(msg3);	//" Temperatura: "
+			  SerialPort_Send_uint8_t(getTemperatura());//se envia el valor obtenido de la temperatura del DHT11
+			  SerialPort_Send_String(msg4); //"C  "
+			   cli(); // se inhabilitan las interrupciones 
+			   RTC_GetDate(fecha); //se obtiene la fecha del RTC
 			   SerialPort_Send_String(" FECHA: ");
 			   SerialPort_Send_String(fecha);
-			   RTC_GetTime(hora);
+			   RTC_GetTime(hora); //se obtiene la hora del RTC
 			   SerialPort_Send_String(" HORA: ");
 			   SerialPort_Send_String(hora);
-			   SerialPort_Send_String(salto);
+			   SerialPort_Send_String(salto); //salto de linea
 			  }
-			  else {SerialPort_Send_String("Se requiere conectar un DHT11\r\n");}
-		sei();
-			inicializarContadores();
-		  while(!chequeoFlag()) {
-			  
+			  else {SerialPort_Send_String("Ha ocurrido un error...\r\n");}
+		      sei();  // habilitacion de interrupciones globales
+			inicializarContador(); //count = 0
+		  while(!chequeoFlag()) { 
+			   // Esperar 2 segundos antes de la siguiente lectura
 		    }
-		  // Esperar 2 segundos antes de la siguiente lectura
 	  }
 	}
 	return 0;
@@ -82,7 +78,7 @@ void configurarTimer1() {
 }
 
 // Función para inicializar los contadores
-void inicializarContadores() {
+void inicializarContador() {
 	count = 0;
 }
 

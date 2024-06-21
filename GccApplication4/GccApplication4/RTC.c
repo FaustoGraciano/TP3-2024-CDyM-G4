@@ -71,7 +71,7 @@ void RTC_GetDate(char* dateStr) {
 	// Leer fecha (día, mes, año)
 	I2C_Start();
 	I2C_Write((DS3232_ADDRESS << 1) | I2C_READ);
-	uint8_t day = bcdToDec(I2C_ReadAck());
+	uint8_t day = bcdToDec(I2C_ReadAck()); 
 	uint8_t month = bcdToDec(I2C_ReadAck());
 	uint8_t year = bcdToDec(I2C_ReadNack());
 	I2C_Stop();
@@ -86,7 +86,7 @@ static uint8_t bcdToDec(uint8_t bcd) {
 
 static void I2C_Init(void) {
 	TWSR = 0x00; // Configurar prescaler a 1
-	TWBR = 255; //152 Configurar SCL a kHz para F_CPU = 16MHz
+	TWBR = 255; // Configurar SCL a kHz para F_CPU = 16MHz
 	TWCR = 0x04; // Habilitar TWI
 }
 
@@ -97,7 +97,6 @@ static void I2C_Start(void) {
 
 static void I2C_Stop(void) {
 	TWCR = (1 << TWSTO) | (1 << TWINT) | (1 << TWEN);
-	while (TWCR & (1 << TWSTO)); //dudoso
 }
 
 static void I2C_Write(uint8_t data) {
