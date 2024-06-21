@@ -10,7 +10,6 @@
 
 // Prototipos de funciones internas
 static uint8_t bcdToDec(uint8_t bcd);
-static uint8_t decToBcd(uint8_t dec);
 static void I2C_Init(void);
 static void I2C_Start(void);
 static void I2C_Stop(void);
@@ -83,10 +82,6 @@ void RTC_GetDate(char* dateStr) {
 
 static uint8_t bcdToDec(uint8_t bcd) {
 	return (bcd / 16 * 10) + (bcd % 16);
-}
-
-static uint8_t decToBcd(uint8_t dec) {
-	return (dec / 10 * 16) + (dec % 10);
 }
 
 static void I2C_Init(void) {

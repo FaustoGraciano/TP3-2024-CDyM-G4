@@ -14,13 +14,10 @@
 // Declarar las funciones
 void configurarTimer1();
 void inicializarContadores();
-uint8_t chequeoFlag2();
-uint8_t chequeoFlag1();
+uint8_t chequeoFlag();
 
 //variables
-uint8_t Flag_MEF;
-uint8_t countMEF;
-uint8_t count2;
+uint16_t count;
 uint8_t Flag_tiempo;
 char msg1[]=" Humedad: ";
 char msg2[]="%  ";
@@ -38,7 +35,7 @@ int main(void)
 	//RTC_SetDate();
 	//RTC_SetTime();
 	int result=0;
-   // configurarTimer1();
+   configurarTimer1();
 	SerialPort_Init(BR9600); 
 	SerialPort_TX_Enable();		// Inicializo formato 8N1 y BAUDRATE = 9600bps
 	SerialPort_RX_Enable();			// Activo el Receptor del Puerto Serie
@@ -46,7 +43,7 @@ int main(void)
 	sei();								// Activo la mascara global de interrupciones (Bit I del SREG en 1)
     while(1){ 
 	if(!suspendFlag) {				
-		result = LeerDHT(PINC0);
+		result = LeerDHT();
 		  if (result == DHTLIB_OK) {
 			  SerialPort_Send_String(msg1);
 			  SerialPort_Send_uint8_t(getHumedad());
@@ -54,20 +51,21 @@ int main(void)
 			  SerialPort_Send_String(msg3);	
 			  SerialPort_Send_uint8_t(getTemperatura());
 			  SerialPort_Send_String(msg4);
-			  //cli();
+			   cli();
 			   RTC_GetDate(fecha);
 			   SerialPort_Send_String(" FECHA: ");
 			   SerialPort_Send_String(fecha);
 			   RTC_GetTime(hora);
 			   SerialPort_Send_String(" HORA: ");
 			   SerialPort_Send_String(hora);
-			  // SerialPort_Send_String(salto);
+			   SerialPort_Send_String(salto);
 			  }
-		//sei();
-			//inicializarContadores();
-		 // while(chequeoFlag2()) {
-			  _delay_ms(2000);
-		  //  }
+			  else {SerialPort_Send_String("Se requiere conectar un DHT11\r\n");}
+		sei();
+			inicializarContadores();
+		  while(!chequeoFlag()) {
+			  
+		    }
 		  // Esperar 2 segundos antes de la siguiente lectura
 	  }
 	}
@@ -85,12 +83,11 @@ void configurarTimer1() {
 
 // Función para inicializar los contadores
 void inicializarContadores() {
-	count2 = 0;
-	countMEF = 0;
+	count = 0;
 }
 
 // Función para chequear la Flag2
-uint8_t chequeoFlag2() {
+uint8_t chequeoFlag() {
 	if (Flag_tiempo == 1) {
 		Flag_tiempo = 0;
 		return 1;
@@ -99,26 +96,12 @@ uint8_t chequeoFlag2() {
 	}
 }
 
-// Función para chequear la Flag1
-uint8_t chequeoFlag1() {
-	if (Flag_MEF == 1) {
-		Flag_MEF = 0;
-		return 1;
-		} else {
-		return 0;
-	}
-}
 
 // ISR del TIMER1
 ISR(TIMER1_COMPA_vect) {
-	countMEF++;    // Incremento del contador para la Flag
-	count2++;
-	if (countMEF == 20) {   // Cada 10 interrupciones se activa el FLAG de chequeo de MEF
-		Flag_MEF = 1;
-		countMEF = 0;
-	}
-	if (count2 == 2000) {
+	count++;    // Incremento del contador para la Flag
+	if (count == 2000) {
 		Flag_tiempo = 1;
-		count2 = 0;
+		count = 0;
 	}
 }
