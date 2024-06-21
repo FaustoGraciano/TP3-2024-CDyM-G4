@@ -321,7 +321,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0xbc8
+.text           0x00000000      0xbc0
  *(.vectors)
  .vectors       0x00000000       0x68 F:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
                 0x00000000                __vector_default
@@ -417,9 +417,9 @@ END GROUP
  .text.configurarTimer1
                 0x0000022e       0x26 main.o
                 0x0000022e                configurarTimer1
- .text.inicializarContadores
+ .text.inicializarContador
                 0x00000254        0xa main.o
-                0x00000254                inicializarContadores
+                0x00000254                inicializarContador
  .text.chequeoFlag
                 0x0000025e       0x12 main.o
                 0x0000025e                chequeoFlag
@@ -435,78 +435,78 @@ END GROUP
  .text.I2C_Start
                 0x0000038e       0x10 RTC.o
  .text.I2C_Stop
-                0x0000039e       0x10 RTC.o
+                0x0000039e        0x8 RTC.o
  .text.I2C_Write
-                0x000003ae       0x14 RTC.o
+                0x000003a6       0x14 RTC.o
  .text.I2C_ReadAck
-                0x000003c2       0x14 RTC.o
+                0x000003ba       0x14 RTC.o
  .text.I2C_ReadNack
-                0x000003d6       0x14 RTC.o
+                0x000003ce       0x14 RTC.o
  .text.RTC_Init
-                0x000003ea        0x6 RTC.o
-                0x000003ea                RTC_Init
+                0x000003e2        0x6 RTC.o
+                0x000003e2                RTC_Init
  .text.RTC_GetTime
-                0x000003f0       0x86 RTC.o
-                0x000003f0                RTC_GetTime
+                0x000003e8       0x86 RTC.o
+                0x000003e8                RTC_GetTime
  .text.RTC_GetDate
-                0x00000476       0x86 RTC.o
-                0x00000476                RTC_GetDate
+                0x0000046e       0x86 RTC.o
+                0x0000046e                RTC_GetDate
  .text.__vector_18
-                0x000004fc       0x36 serialPort.o
-                0x000004fc                __vector_18
+                0x000004f4       0x36 serialPort.o
+                0x000004f4                __vector_18
  .text.SerialPort_Init
-                0x00000532       0x14 serialPort.o
-                0x00000532                SerialPort_Init
+                0x0000052a       0x14 serialPort.o
+                0x0000052a                SerialPort_Init
  .text.SerialPort_TX_Enable
-                0x00000546        0xc serialPort.o
-                0x00000546                SerialPort_TX_Enable
+                0x0000053e        0xc serialPort.o
+                0x0000053e                SerialPort_TX_Enable
  .text.SerialPort_RX_Enable
-                0x00000552        0xc serialPort.o
-                0x00000552                SerialPort_RX_Enable
+                0x0000054a        0xc serialPort.o
+                0x0000054a                SerialPort_RX_Enable
  .text.SerialPort_RX_Interrupt_Enable
-                0x0000055e        0xc serialPort.o
-                0x0000055e                SerialPort_RX_Interrupt_Enable
+                0x00000556        0xc serialPort.o
+                0x00000556                SerialPort_RX_Interrupt_Enable
  .text.SerialPort_Wait_For_TX_Buffer_Free
-                0x0000056a        0xa serialPort.o
-                0x0000056a                SerialPort_Wait_For_TX_Buffer_Free
+                0x00000562        0xa serialPort.o
+                0x00000562                SerialPort_Wait_For_TX_Buffer_Free
  .text.SerialPort_Send_Data
-                0x00000574        0x6 serialPort.o
-                0x00000574                SerialPort_Send_Data
+                0x0000056c        0x6 serialPort.o
+                0x0000056c                SerialPort_Send_Data
  .text.SerialPort_Send_String
-                0x0000057a       0x38 serialPort.o
-                0x0000057a                SerialPort_Send_String
+                0x00000572       0x38 serialPort.o
+                0x00000572                SerialPort_Send_String
  .text.SerialPort_Send_uint8_t
-                0x000005b2       0x3e serialPort.o
-                0x000005b2                SerialPort_Send_uint8_t
+                0x000005aa       0x3e serialPort.o
+                0x000005aa                SerialPort_Send_uint8_t
  .text.avr-libc
-                0x000005f0       0x44 f:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(sprintf.o)
-                0x000005f0                sprintf
+                0x000005e8       0x44 f:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(sprintf.o)
+                0x000005e8                sprintf
  .text.avr-libc
-                0x00000634      0x3c2 f:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
-                0x00000634                vfprintf
+                0x0000062c      0x3c2 f:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
+                0x0000062c                vfprintf
  .text.avr-libc
-                0x000009f6       0x16 f:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
-                0x000009f6                strnlen_P
+                0x000009ee       0x16 f:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
+                0x000009ee                strnlen_P
  .text.avr-libc
-                0x00000a0c       0x16 f:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen.o)
-                0x00000a0c                strnlen
+                0x00000a04       0x16 f:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen.o)
+                0x00000a04                strnlen
  .text.avr-libc
-                0x00000a22       0x78 f:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(fputc.o)
-                0x00000a22                fputc
+                0x00000a1a       0x78 f:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(fputc.o)
+                0x00000a1a                fputc
  .text.avr-libc
-                0x00000a9a       0xbc f:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
-                0x00000a9a                __ultoa_invert
+                0x00000a92       0xbc f:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
+                0x00000a92                __ultoa_invert
  .text.libgcc.prologue
-                0x00000b56       0x38 f:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_prologue.o)
-                0x00000b56                __prologue_saves__
+                0x00000b4e       0x38 f:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_prologue.o)
+                0x00000b4e                __prologue_saves__
  .text.libgcc.prologue
-                0x00000b8e       0x36 f:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_epilogue.o)
-                0x00000b8e                __epilogue_restores__
-                0x00000bc4                . = ALIGN (0x2)
+                0x00000b86       0x36 f:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_epilogue.o)
+                0x00000b86                __epilogue_restores__
+                0x00000bbc                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000bc4        0x0 f:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x00000bc4                _exit
-                0x00000bc4                exit
+ .fini9         0x00000bbc        0x0 f:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x00000bbc                _exit
+                0x00000bbc                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -525,11 +525,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000bc4        0x4 f:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x00000bbc        0x4 f:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00000bc8                _etext = .
+                0x00000bc0                _etext = .
 
-.data           0x00800100       0x74 load address 0x00000bc8
+.data           0x00800100       0x6e load address 0x00000bc0
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -547,39 +547,39 @@ END GROUP
  *(.rodata)
  *(.rodata*)
  .rodata.str1.1
-                0x00800125       0x31 main.o
+                0x00800125       0x2b main.o
  .rodata.str1.1
-                0x00800156       0x1e RTC.o
+                0x00800150       0x1e RTC.o
  *(.gnu.linkonce.r*)
-                0x00800174                . = ALIGN (0x2)
-                0x00800174                _edata = .
-                0x00800174                PROVIDE (__data_end, .)
+                0x0080016e                . = ALIGN (0x2)
+                0x0080016e                _edata = .
+                0x0080016e                PROVIDE (__data_end, .)
 
-.bss            0x00800174        0x8
-                0x00800174                PROVIDE (__bss_start, .)
+.bss            0x0080016e        0x8
+                0x0080016e                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
  .bss.temperatura
-                0x00800174        0x1 DHT11.o
- .bss.humedad   0x00800175        0x1 DHT11.o
+                0x0080016e        0x1 DHT11.o
+ .bss.humedad   0x0080016f        0x1 DHT11.o
  .bss.suspendFlag
-                0x00800176        0x1 main.o
-                0x00800176                suspendFlag
+                0x00800170        0x1 main.o
+                0x00800170                suspendFlag
  *(COMMON)
- COMMON         0x00800177        0x5 main.o
-                0x00800177                hora
-                0x00800178                Flag_tiempo
-                0x00800179                count
-                0x0080017b                fecha
-                0x0080017c                PROVIDE (__bss_end, .)
-                0x00000bc8                __data_load_start = LOADADDR (.data)
-                0x00000c3c                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x00800171        0x5 main.o
+                0x00800171                hora
+                0x00800172                Flag_tiempo
+                0x00800173                count
+                0x00800175                fecha
+                0x00800176                PROVIDE (__bss_end, .)
+                0x00000bc0                __data_load_start = LOADADDR (.data)
+                0x00000c2e                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x0080017c        0x0
+.noinit         0x00800176        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x0080017c                _end = .
+                0x00800176                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -681,13 +681,13 @@ END GROUP
  .debug_abbrev  0x000007f5      0x148 RTC.o
  .debug_abbrev  0x0000093d      0x15b serialPort.o
 
-.debug_line     0x00000000      0xb9f
+.debug_line     0x00000000      0xb8f
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x134 F:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_line    0x00000134      0x294 DHT11.o
  .debug_line    0x000003c8      0x209 main.o
- .debug_line    0x000005d1      0x2e4 RTC.o
- .debug_line    0x000008b5      0x2ea serialPort.o
+ .debug_line    0x000005d1      0x2d4 RTC.o
+ .debug_line    0x000008a5      0x2ea serialPort.o
 
 .debug_frame    0x00000000      0x374
  *(.debug_frame)
@@ -696,16 +696,16 @@ END GROUP
  .debug_frame   0x000000d4      0x14c RTC.o
  .debug_frame   0x00000220      0x154 serialPort.o
 
-.debug_str      0x00000000      0x6e0
+.debug_str      0x00000000      0x6de
  *(.debug_str)
  .debug_str     0x00000000      0x208 F:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_str     0x00000208      0x1ed DHT11.o
                                 0x229 (size before relaxing)
- .debug_str     0x000003f5      0x143 main.o
-                                0x2e9 (size before relaxing)
- .debug_str     0x00000538       0xa4 RTC.o
+ .debug_str     0x000003f5      0x141 main.o
+                                0x2e7 (size before relaxing)
+ .debug_str     0x00000536       0xa4 RTC.o
                                 0x23c (size before relaxing)
- .debug_str     0x000005dc      0x104 serialPort.o
+ .debug_str     0x000005da      0x104 serialPort.o
                                 0x318 (size before relaxing)
 
 .debug_loc      0x00000000      0x980

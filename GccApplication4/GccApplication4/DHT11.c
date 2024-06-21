@@ -1,6 +1,7 @@
+
 #include "DHT11.h"
-#include "Timer.h"
 #include <stdint.h>
+#include <avr/interrupt.h>
 #define F_CPU 16000000UL
 #include <util/delay.h>
 
