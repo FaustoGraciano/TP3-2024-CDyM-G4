@@ -6,14 +6,20 @@ Este proyecto implementa un sistema de medición de temperatura y humedad utiliz
 
 # Componentes
 -Microcontrolador: ATmega328P
+
 -Sensor de temperatura y humedad: DHT11
+
 -Reloj en tiempo real (RTC): DS3232
+
 -Comunicación serial (UART): Para transmisión de datos a un PC
 
 # Archivos del Proyecto
 -main.c: Código principal del sistema.
+
 -DHT11.c y DHT11.h: Implementación y definición de funciones para el sensor DHT11.
+
 -serialPort.c y serialPort.h: Configuración e implementación de funciones para la comunicación UART.
+
 -RTC.c y RTC.h: Implementación y definición de funciones para el módulo RTC.
 
 # Funcionalidades
@@ -39,4 +45,5 @@ Uso de banderas para sincronización y temporización de eventos.
 
 # Notas
 -Asegúrese de que todos los componentes estén correctamente conectados y alimentados.
+
 -Verifique que el baud rate del monitor serial coincida con el configurado en el código (9600 bps).
